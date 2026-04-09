@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrainApp {
 
@@ -9,12 +11,20 @@ public class TrainApp {
         System.out.println(" Train Consist Management App");
         System.out.println("======================================");
 
+ UC3-UniqueBogieIDs
+        // ================= UC1 =================
+
         // UC1: Initialize train consist
+ main
         List<String> trainConsist = new ArrayList<>();
         System.out.println("Train consist initialized.");
         System.out.println("Initial bogie count: " + trainConsist.size());
 
+ UC3-UniqueBogieIDs
+        // ================= UC2 =================
+
         // UC2: Passenger bogies
+ main
         List<String> passengerBogies = new ArrayList<>();
 
         passengerBogies.add("Sleeper");
@@ -35,6 +45,20 @@ public class TrainApp {
         System.out.println("\nFinal Bogie List:");
         System.out.println(passengerBogies);
 
+ UC3-UniqueBogieIDs
+        // ================= UC3 =================
+        Set<String> bogieIDs = new HashSet<>();
+
+        bogieIDs.add("BG101");
+        bogieIDs.add("BG102");
+        bogieIDs.add("BG103");
+        bogieIDs.add("BG101"); // duplicate
+
+        System.out.println("\nUnique Bogie IDs:");
+        System.out.println(bogieIDs);
+
+
+ main
         System.out.println("\nProgram running...");
     }
 }
