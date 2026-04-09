@@ -1,13 +1,22 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.LinkedList;
-import java.util.LinkedHashSet;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class TrainApp {
+
+    // ================= UC7: Bogie Class =================
+    static class Bogie {
+        String name;
+        int capacity;
+
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+
+        @Override
+        public String toString() {
+            return name + " → Capacity: " + capacity;
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -102,9 +111,23 @@ public class TrainApp {
         bogieCapacity.put("First Class", 40);
 
         System.out.println("\nBogie Capacity Details:");
-
         for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
             System.out.println(entry.getKey() + " → Capacity: " + entry.getValue());
+        }
+
+        // ================= UC7 =================
+        List<Bogie> bogieList = new ArrayList<>();
+
+        bogieList.add(new Bogie("Sleeper", 72));
+        bogieList.add(new Bogie("AC Chair", 60));
+        bogieList.add(new Bogie("First Class", 40));
+
+        // Sort using Comparator (ascending order)
+        bogieList.sort(Comparator.comparingInt(b -> b.capacity));
+
+        System.out.println("\nBogies Sorted by Capacity:");
+        for (Bogie b : bogieList) {
+            System.out.println(b);
         }
 
         System.out.println("\nProgram running...");
