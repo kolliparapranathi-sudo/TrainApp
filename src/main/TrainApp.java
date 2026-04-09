@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 
 public class TrainApp {
 
-    // Bogie class (used in UC7–UC10)
+    // Bogie class (UC7–UC10)
     static class Bogie {
         String name;
         int capacity;
@@ -18,6 +18,17 @@ public class TrainApp {
         @Override
         public String toString() {
             return name + "(" + capacity + ")";
+        }
+    }
+
+    // Goods Bogie class (UC12)
+    static class GoodsBogie {
+        String type;
+        String cargo;
+
+        GoodsBogie(String type, String cargo) {
+            this.type = type;
+            this.cargo = cargo;
         }
     }
 
@@ -44,7 +55,6 @@ public class TrainApp {
         passengerBogies.add("Sleeper");
         passengerBogies.add("AC Chair");
         passengerBogies.add("First Class");
-
         passengerBogies.remove("AC Chair");
 
         System.out.println("\nPassenger Bogies:");
@@ -116,13 +126,11 @@ public class TrainApp {
         filtered.forEach(System.out::println);
 
         // ================= UC9 =================
-        Map<String, List<Bogie>> groupedBogies = bogieList.stream()
+        Map<String, List<Bogie>> grouped = bogieList.stream()
                 .collect(Collectors.groupingBy(b -> b.name));
 
         System.out.println("\nGrouped Bogies:");
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println(entry.getKey() + " → " + entry.getValue());
-        }
+        grouped.forEach((k, v) -> System.out.println(k + " → " + v));
 
         // ================= UC10 =================
         int totalCapacity = bogieList.stream()
@@ -133,27 +141,29 @@ public class TrainApp {
         System.out.println(totalCapacity);
 
         // ================= UC11 =================
-
         String trainID = "TRN-1234";
         String cargoCode = "PET-AB";
 
         Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
         Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
 
-        Matcher trainMatcher = trainPattern.matcher(trainID);
-        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
+        System.out.println("\nTrain ID Valid: " + trainPattern.matcher(trainID).matches());
+        System.out.println("Cargo Code Valid: " + cargoPattern.matcher(cargoCode).matches());
 
-        if (trainMatcher.matches()) {
-            System.out.println("\nTrain ID is VALID: " + trainID);
-        } else {
-            System.out.println("\nTrain ID is INVALID: " + trainID);
-        }
+        // ================= UC12 =================
+        List<GoodsBogie> goodsList = new ArrayList<>();
 
-        if (cargoMatcher.matches()) {
-            System.out.println("Cargo Code is VALID: " + cargoCode);
-        } else {
-            System.out.println("Cargo Code is INVALID: " + cargoCode);
-        }
+        goodsList.add(new GoodsBogie("Cylindrical", "Petroleum"));
+        goodsList.add(new GoodsBogie("Rectangular", "Coal"));
+        goodsList.add(new GoodsBogie("Cylindrical", "Petroleum"));
+
+        // Safety rule check
+        boolean isSafe = goodsList.stream()
+                .allMatch(b ->
+                        !b.type.equals("Cylindrical") || b.cargo.equals("Petroleum")
+                );
+
+        System.out.println("\nTrain Safety Compliance: " + (isSafe ? "SAFE" : "UNSAFE"));
 
         System.out.println("\nProgram running...");
     }
