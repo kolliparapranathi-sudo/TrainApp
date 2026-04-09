@@ -1,9 +1,11 @@
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class TrainApp {
 
-    // Bogie class (used in UC7, UC8, UC9)
+    // Bogie class (used in UC7–UC10)
     static class Bogie {
         String name;
         int capacity;
@@ -112,15 +114,37 @@ public class TrainApp {
             System.out.println(entry.getKey() + " → " + entry.getValue());
         }
 
-        System.out.println("\nProgram running...");
         // ================= UC10 =================
+        int totalCapacity = bogieList.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
 
-// Calculate total seating capacity
-int totalCapacity = bogieList.stream()
-        .map(b -> b.capacity)      // extract capacity
-        .reduce(0, Integer::sum);  // sum all values
+        System.out.println("\nTotal Seating Capacity:");
+        System.out.println(totalCapacity);
 
-System.out.println("\nTotal Seating Capacity:");
-System.out.println(totalCapacity);
+        // ================= UC11 =================
+
+        String trainID = "TRN-1234";
+        String cargoCode = "PET-AB";
+
+        Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
+        Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
+
+        Matcher trainMatcher = trainPattern.matcher(trainID);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
+
+        if (trainMatcher.matches()) {
+            System.out.println("\nTrain ID is VALID: " + trainID);
+        } else {
+            System.out.println("\nTrain ID is INVALID: " + trainID);
+        }
+
+        if (cargoMatcher.matches()) {
+            System.out.println("Cargo Code is VALID: " + cargoCode);
+        } else {
+            System.out.println("Cargo Code is INVALID: " + cargoCode);
+        }
+
+        System.out.println("\nProgram running...");
     }
 }
