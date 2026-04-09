@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.LinkedList;
+import java.util.LinkedHashSet;
 
 public class TrainApp {
 
@@ -58,18 +59,28 @@ public class TrainApp {
         trainOrder.add("Cargo");
         trainOrder.add("Guard");
 
-        // Insert at position
         trainOrder.add(2, "Pantry Car");
 
         System.out.println("\nTrain Consist after insertion:");
         System.out.println(trainOrder);
 
-        // Remove first and last
         trainOrder.removeFirst();
         trainOrder.removeLast();
 
         System.out.println("\nAfter removing first and last bogie:");
         System.out.println(trainOrder);
+
+        // ================= UC5 =================
+        LinkedHashSet<String> trainFormation = new LinkedHashSet<>();
+
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
+        trainFormation.add("Sleeper"); // duplicate
+
+        System.out.println("\nTrain Formation (Ordered & Unique):");
+        System.out.println(trainFormation);
 
         System.out.println("\nProgram running...");
     }
