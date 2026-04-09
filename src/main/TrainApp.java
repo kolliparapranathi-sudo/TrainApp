@@ -123,5 +123,14 @@ public class TrainApp {
         }
 
         System.out.println("\nProgram running...");
+        // ================= UC10 =================
+
+// Calculate total seating capacity
+int totalCapacity = bogieList.stream()
+        .map(b -> b.capacity)      // extract capacity
+        .reduce(0, Integer::sum);  // sum all values
+
+System.out.println("\nTotal Seating Capacity:");
+System.out.println(totalCapacity);
     }
 }
