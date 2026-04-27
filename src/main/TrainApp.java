@@ -152,7 +152,7 @@ public class TrainApp {
         new GoodsBogie("Cylindrical").assignCargo("Petroleum");
         new GoodsBogie("Rectangular").assignCargo("Petroleum");
 
-        // UC16 (Bubble Sort)
+        // UC16
         System.out.println("\nUC16:");
         int[] arr={72,56,24,70,60};
         for(int i=0;i<arr.length-1;i++){
@@ -170,7 +170,7 @@ public class TrainApp {
         Arrays.sort(names);
         System.out.println(Arrays.toString(names));
 
-        // UC18 (Linear Search)
+        // UC18
         System.out.println("\nUC18:");
         String[] bogieIDs = {"BG101","BG205","BG309","BG412","BG550"};
         String searchKey = "BG309";
@@ -184,7 +184,7 @@ public class TrainApp {
         }
         System.out.println(found ? "FOUND" : "NOT FOUND");
 
-        // UC19 (Binary Search)
+        // UC19
         System.out.println("\nUC19:");
         String[] arrIDs = {"BG309","BG101","BG550","BG205","BG412"};
         Arrays.sort(arrIDs);
@@ -203,6 +203,30 @@ public class TrainApp {
         }
 
         System.out.println(foundBinary ? "FOUND" : "NOT FOUND");
+
+        // ================= UC20 =================
+        System.out.println("\nUC20:");
+
+        String[] emptyData = {}; // empty case
+
+        try {
+            if (emptyData.length == 0) {
+                throw new IllegalStateException("Cannot search: No bogies available.");
+            }
+
+            // (this part won't run because exception occurs)
+            boolean result = false;
+            for(String id : emptyData){
+                if(id.equals("BG101")){
+                    result = true;
+                }
+            }
+
+            System.out.println(result ? "FOUND" : "NOT FOUND");
+
+        } catch (IllegalStateException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
 
         System.out.println("\n=== Program Completed ===");
     }
