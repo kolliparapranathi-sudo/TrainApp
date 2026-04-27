@@ -1,11 +1,10 @@
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 public class TrainApp {
 
-    // Bogie class (UC7–UC10)
+    // Bogie class (UC7–UC10, UC13)
     static class Bogie {
         String name;
         int capacity;
@@ -157,13 +156,49 @@ public class TrainApp {
         goodsList.add(new GoodsBogie("Rectangular", "Coal"));
         goodsList.add(new GoodsBogie("Cylindrical", "Petroleum"));
 
-        // Safety rule check
         boolean isSafe = goodsList.stream()
                 .allMatch(b ->
                         !b.type.equals("Cylindrical") || b.cargo.equals("Petroleum")
                 );
 
         System.out.println("\nTrain Safety Compliance: " + (isSafe ? "SAFE" : "UNSAFE"));
+
+        // ================= UC13 =================
+        List<Bogie> testBogies = new ArrayList<>();
+
+        for (int i = 0; i < 10000; i++) {
+            testBogies.add(new Bogie("Sleeper", 72));
+            testBogies.add(new Bogie("AC Chair", 60));
+            testBogies.add(new Bogie("First Class", 40));
+        }
+
+        // Loop approach
+        long startLoop = System.nanoTime();
+
+        List<Bogie> loopResult = new ArrayList<>();
+        for (Bogie b : testBogies) {
+            if (b.capacity > 60) {
+                loopResult.add(b);
+            }
+        }
+
+        long endLoop = System.nanoTime();
+        long loopTime = endLoop - startLoop;
+
+        // Stream approach
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamResult = testBogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        long endStream = System.nanoTime();
+        long streamTime = endStream - startStream;
+
+        System.out.println("\nUC13 Performance Comparison:");
+        System.out.println("Loop Time (ns): " + loopTime);
+        System.out.println("Stream Time (ns): " + streamTime);
+        System.out.println("Results equal? " + (loopResult.size() == streamResult.size()));
 
         System.out.println("\nProgram running...");
     }
