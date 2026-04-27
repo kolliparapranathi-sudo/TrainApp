@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 public class TrainApp {
 
     // ================= COMMON CLASSES =================
-
     static class Bogie {
         String name;
         int capacity;
@@ -44,7 +43,6 @@ public class TrainApp {
     }
 
     // ================= EXCEPTIONS =================
-
     static class InvalidCapacityException extends Exception {
         InvalidCapacityException(String msg) {
             super(msg);
@@ -154,7 +152,7 @@ public class TrainApp {
         new GoodsBogie("Cylindrical").assignCargo("Petroleum");
         new GoodsBogie("Rectangular").assignCargo("Petroleum");
 
-        // UC16 (Bubble Sort)
+        // UC16
         System.out.println("\nUC16:");
         int[] arr={72,56,24,70,60};
         for(int i=0;i<arr.length-1;i++){
@@ -166,11 +164,31 @@ public class TrainApp {
         }
         System.out.println(Arrays.toString(arr));
 
-        // UC17 (Arrays.sort)
+        // UC17
         System.out.println("\nUC17:");
         String[] names={"Sleeper","AC Chair","First Class","General","Luxury"};
         Arrays.sort(names);
         System.out.println(Arrays.toString(names));
+
+        // ================= UC18 =================
+        System.out.println("\nUC18 Linear Search:");
+
+        String[] bogieIDs = {"BG101","BG205","BG309","BG412","BG550"};
+        String searchKey = "BG309";
+
+        boolean found = false;
+        for (String id : bogieIDs) {
+            if (id.equals(searchKey)) {
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            System.out.println("Bogie ID " + searchKey + " FOUND");
+        } else {
+            System.out.println("Bogie ID " + searchKey + " NOT FOUND");
+        }
 
         System.out.println("\n=== Program Completed ===");
     }
