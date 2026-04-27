@@ -152,7 +152,7 @@ public class TrainApp {
         new GoodsBogie("Cylindrical").assignCargo("Petroleum");
         new GoodsBogie("Rectangular").assignCargo("Petroleum");
 
-        // UC16
+        // UC16 (Bubble Sort)
         System.out.println("\nUC16:");
         int[] arr={72,56,24,70,60};
         for(int i=0;i<arr.length-1;i++){
@@ -170,25 +170,39 @@ public class TrainApp {
         Arrays.sort(names);
         System.out.println(Arrays.toString(names));
 
-        // ================= UC18 =================
-        System.out.println("\nUC18 Linear Search:");
-
+        // UC18 (Linear Search)
+        System.out.println("\nUC18:");
         String[] bogieIDs = {"BG101","BG205","BG309","BG412","BG550"};
         String searchKey = "BG309";
 
         boolean found = false;
-        for (String id : bogieIDs) {
-            if (id.equals(searchKey)) {
+        for(String id : bogieIDs){
+            if(id.equals(searchKey)){
                 found = true;
                 break;
             }
         }
+        System.out.println(found ? "FOUND" : "NOT FOUND");
 
-        if (found) {
-            System.out.println("Bogie ID " + searchKey + " FOUND");
-        } else {
-            System.out.println("Bogie ID " + searchKey + " NOT FOUND");
+        // UC19 (Binary Search)
+        System.out.println("\nUC19:");
+        String[] arrIDs = {"BG309","BG101","BG550","BG205","BG412"};
+        Arrays.sort(arrIDs);
+
+        String key = "BG309";
+        int low=0, high=arrIDs.length-1;
+        boolean foundBinary=false;
+
+        while(low<=high){
+            int mid=(low+high)/2;
+            int cmp = arrIDs[mid].compareTo(key);
+
+            if(cmp==0){ foundBinary=true; break; }
+            else if(cmp<0) low=mid+1;
+            else high=mid-1;
         }
+
+        System.out.println(foundBinary ? "FOUND" : "NOT FOUND");
 
         System.out.println("\n=== Program Completed ===");
     }
