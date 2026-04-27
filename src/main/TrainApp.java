@@ -86,10 +86,45 @@ public class TrainApp {
         // UC3
         Set<String> ids = new HashSet<>(Arrays.asList("BG101","BG102","BG101"));
         System.out.println("\nUC3: " + ids);
-
+ feature/UC17-ArraysSort
         // UC4
         LinkedList<String> order = new LinkedList<>(Arrays.asList("Engine","Sleeper","AC","Cargo","Guard"));
         order.add(2,"Pantry");
+=======
+        System.out.println("======================================");
+        System.out.println(" Train Consist Management App");
+        System.out.println("======================================");
+
+ UC3-UniqueBogieIDs
+        // ================= UC1 =================
+
+        // UC1: Initialize train consist
+ main
+        List<String> trainConsist = new ArrayList<>();
+        System.out.println("Initial bogie count: " + trainConsist.size());
+
+ UC3-UniqueBogieIDs
+        // ================= UC2 =================
+
+        // UC2: Passenger bogies
+ main
+        List<String> passengerBogies = new ArrayList<>();
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
+        passengerBogies.remove("AC Chair");
+        System.out.println("\nPassenger Bogies: " + passengerBogies);
+
+ UC3-UniqueBogieIDs
+        // ================= UC3 =================
+        Set<String> ids = new HashSet<>(Arrays.asList("BG101", "BG102", "BG101"));
+        System.out.println("\nUnique IDs: " + ids);
+
+ UC4-TrainConsistLinkedList
+        // ================= UC4 =================
+        LinkedList<String> order = new LinkedList<>(Arrays.asList("Engine", "Sleeper", "AC", "Cargo", "Guard"));
+        order.add(2, "Pantry");
+ main
         order.removeFirst();
         order.removeLast();
         System.out.println("\nUC4: " + order);
